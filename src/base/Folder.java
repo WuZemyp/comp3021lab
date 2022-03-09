@@ -1,6 +1,8 @@
 package base;
 import java.util.ArrayList;
-public class Folder {
+import java.util.Collections;
+import java.util.List;
+public class Folder implements Comparable<Folder>{
 	private ArrayList<Note> notes;
 	private String name;
 	public Folder(String name)
@@ -48,4 +50,150 @@ public class Folder {
 		}
 		return name + ":" + nText + ":" + nImage;
 	}
+	@Override
+	public int compareTo(Folder o) {
+		// TODO Auto-generated method stub
+		return this.name.compareTo(o.name);
+	}
+	public void sortNotes()
+	{
+		Collections.sort(notes);
+	}
+	public List<Note> searchNotes(String keywords)
+	{
+		String [] keys= keywords.split(" ");
+
+		String current;
+		List<Note> newone=new ArrayList<Note>();
+		boolean indicator=true;
+		for(Note n:notes)
+		{
+			indicator=true;
+			if(n instanceof ImageNote)
+			{
+				current=n.getTitle().toLowerCase();
+				for(int i=0;i<keys.length;++i)
+				{
+					if(i+1>=keys.length)
+					{
+						if(keys[i-1].compareToIgnoreCase("or")==0)
+						{
+							break;
+						}
+						if(!current.contains(keys[i].toLowerCase()))
+						{
+							indicator=false;
+						}
+						break;
+					}
+					if(keys[i+1].compareToIgnoreCase("or")==0)
+					{
+						if(!(current.contains(keys[i].toLowerCase())||current.contains(keys[i+2].toLowerCase())))
+						{
+							indicator=false;
+							break;
+						}
+						i+=2;
+					}
+					else
+					{
+						if(!current.contains(keys[i].toLowerCase()))
+						{
+							indicator=false;
+							break;
+						}
+					}
+				}
+				if(indicator)
+				{
+					newone.add(n);
+				}
+			}
+			else
+			{
+				current=n.getTitle().toLowerCase();
+				for(int i=0;i<keys.length;++i)
+				{
+
+					if(i+1>=keys.length)
+					{
+						if(keys[i-1].compareToIgnoreCase("or")==0)
+						{
+							break;
+						}
+						if(!current.contains(keys[i].toLowerCase()))
+						{
+							indicator=false;
+						}
+						break;
+					}
+					if(keys[i+1].compareToIgnoreCase("or")==0)
+					{
+						if(!(current.contains(keys[i].toLowerCase())||current.contains(keys[i+2].toLowerCase())))
+						{
+							indicator=false;
+							break;
+						}
+						i+=2;
+					}
+					else
+					{
+						if(!current.contains(keys[i].toLowerCase()))
+						{
+							indicator=false;
+							break;
+						}
+					}
+				}
+				if(indicator)
+				{
+					newone.add(n);
+					continue;
+				}
+				indicator=true;
+				TextNote a=(TextNote)n;
+				current=a.getcontent().toLowerCase();
+				for(int i=0;i<keys.length;++i)
+				{
+
+					if(i+1>=keys.length)
+					{
+						if(keys[i-1].compareToIgnoreCase("or")==0)
+						{
+							break;
+						}
+						if(!current.contains(keys[i].toLowerCase()))
+						{
+							indicator=false;
+						}
+						break;
+					}
+					if(keys[i+1].compareToIgnoreCase("or")==0)
+					{
+						if(!(current.contains(keys[i].toLowerCase())||current.contains(keys[i+2].toLowerCase())))
+						{
+							indicator=false;
+							break;
+						}
+						i+=2;
+					}
+					else
+					{
+						if(!current.contains(keys[i].toLowerCase()))
+						{
+							indicator=false;
+							break;
+						}
+					}
+				}
+				if(indicator)
+				{
+					newone.add(n);
+
+				}
+			}
+		}
+		return newone;
+	}
+
 }
