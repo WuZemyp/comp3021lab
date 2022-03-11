@@ -66,6 +66,9 @@ public class Folder implements Comparable<Folder>{
 		String current;
 		List<Note> newone=new ArrayList<Note>();
 		boolean indicator=true;
+		boolean indicator2=true;
+		int j=0;
+		List<String> orone=new ArrayList<String>();
 		for(Note n:notes)
 		{
 			indicator=true;
@@ -88,12 +91,42 @@ public class Folder implements Comparable<Folder>{
 					}
 					if(keys[i+1].compareToIgnoreCase("or")==0)
 					{
-						if(!(current.contains(keys[i].toLowerCase())||current.contains(keys[i+2].toLowerCase())))
+//						if(!(current.contains(keys[i].toLowerCase())||current.contains(keys[i+2].toLowerCase())))
+//						{
+//							indicator=false;
+//							break;
+//						}
+//						i+=2;
+						j=i+3;
+						orone.clear();
+						orone.add(keys[i]);
+						orone.add(keys[i+2]);
+						while(j<keys.length&&keys[j].compareToIgnoreCase("or")==0)
+						{
+							orone.add(keys[j+1]);
+							j+=2;
+						}
+						indicator2=false;
+						for(String s:orone)
+						{
+							if(current.contains(s.toLowerCase()))
+							{
+								indicator2=true;
+							}
+						}
+						if(j>=keys.length)
+						{
+							i=keys.length;
+						}
+						else
+						{
+							i=j-1;
+						}
+						if(!indicator2)
 						{
 							indicator=false;
 							break;
 						}
-						i+=2;
 					}
 					else
 					{
@@ -129,12 +162,42 @@ public class Folder implements Comparable<Folder>{
 					}
 					if(keys[i+1].compareToIgnoreCase("or")==0)
 					{
-						if(!(current.contains(keys[i].toLowerCase())||current.contains(keys[i+2].toLowerCase())))
+//						if(!(current.contains(keys[i].toLowerCase())||current.contains(keys[i+2].toLowerCase())))
+//						{
+//							indicator=false;
+//							break;
+//						}
+//						i+=2;
+						j=i+3;
+						orone.clear();
+						orone.add(keys[i]);
+						orone.add(keys[i+2]);
+						while(j<keys.length&&keys[j].compareToIgnoreCase("or")==0)
+						{
+							orone.add(keys[j+1]);
+							j+=2;
+						}
+						indicator2=false;
+						for(String s:orone)
+						{
+							if(current.contains(s.toLowerCase()))
+							{
+								indicator2=true;
+							}
+						}
+						if(j>=keys.length)
+						{
+							i=keys.length;
+						}
+						else
+						{
+							i=j-1;
+						}
+						if(!indicator2)
 						{
 							indicator=false;
 							break;
 						}
-						i+=2;
 					}
 					else
 					{
@@ -170,12 +233,43 @@ public class Folder implements Comparable<Folder>{
 					}
 					if(keys[i+1].compareToIgnoreCase("or")==0)
 					{
-						if(!(current.contains(keys[i].toLowerCase())||current.contains(keys[i+2].toLowerCase())))
+//						if(!(current.contains(keys[i].toLowerCase())||current.contains(keys[i+2].toLowerCase())))
+//						{
+//							indicator=false;
+//							break;
+//						}
+//						i+=2;
+						j=i+3;
+						orone.clear();
+						orone.add(keys[i]);
+						orone.add(keys[i+2]);
+						while(j<keys.length&&keys[j].compareToIgnoreCase("or")==0)
+						{
+							orone.add(keys[j+1]);
+							j+=2;
+						}
+						indicator2=false;
+						for(String s:orone)
+						{
+							if(current.contains(s.toLowerCase()))
+							{
+								indicator2=true;
+							}
+						}
+						if(j>=keys.length)
+						{
+							i=keys.length;
+						}
+						else
+						{
+							i=j-1;
+						}
+
+						if(!indicator2)
 						{
 							indicator=false;
 							break;
 						}
-						i+=2;
 					}
 					else
 					{
