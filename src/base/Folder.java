@@ -64,7 +64,29 @@ public class Folder implements Comparable<Folder>,java.io.Serializable{
 	public List<Note> searchNotes(String keywords)
 	{
 		String [] keys= keywords.split(" ");
+		List<Note> aa=new ArrayList<Note>();
+		if(keys.length==1)
+		{
+			for(Note n:notes)
+			{
+				if(n instanceof ImageNote)
+				{
+					if(n.getTitle().toLowerCase().contains(keys[0].toLowerCase()))
+					{
 
+						aa.add(n);
+					}
+				}
+				else
+				{
+					if(n.getTitle().toLowerCase().contains(keys[0].toLowerCase())||((TextNote)n).getcontent().toLowerCase().contains(keys[0].toLowerCase()))
+					{
+						aa.add(n);
+					}
+				}
+			}
+			return aa;
+		}
 		String current;
 		List<Note> newone=new ArrayList<Note>();
 		boolean indicator=true;
