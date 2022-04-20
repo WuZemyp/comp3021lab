@@ -90,5 +90,9 @@ public class TextNote extends Note {
 
 		// TODO
 	}
+	public void setContent(String content)
+	{
+		this.content=content;
+	}
 
 }
